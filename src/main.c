@@ -66,7 +66,6 @@ int main() {
     }
   }
 
-
   /* Esperando todas as threads terminarem */
   for (int i = 0; i < 4; i++) {
     pthread_join(threads[i], NULL);
