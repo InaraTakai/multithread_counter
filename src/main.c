@@ -30,9 +30,6 @@ void* funcao_thread(void *arg) { /* No parâmetro *arg é passado o inteiro que 
   int* N = (int*)arg;
   int M = (*N);
 
-  for (unsigned int j=0; j<5000000; j++); /* Pode ser trocado pelo sleep, porém aumenta tempo de execução */
-  /* sleep(1); */
-
   qtd_primos += num_primo(M);
 
   return NULL;
@@ -51,7 +48,7 @@ int main() {
 
       pthread_create(&(threads[num_processos]), NULL, funcao_thread, &numero);
 
-      for (int p = 0; p<800000; p++); /* Pode ser trocado pelo sleep, porém aumenta tempo de execução */
+      for (int p = 0; p<800000; p++); /* Para dar tempo de entrar na função thread antes de ler próximo número. Pode ser trocado pelo sleep, porém aumenta tempo de execução.  */
       /* sleep(1); */
 
       num_processos++;
