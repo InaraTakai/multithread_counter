@@ -38,28 +38,28 @@ void* funcao_thread(void *arg) { /* No parâmetro *arg é passado o inteiro que 
 int main() {
   pthread_t threads[4];
   int aux = 0;
-  int num_processos = 0;
+  int num_threads = 0;
 
   qtd_primos = 0;
 
   while (aux == 0){
-    if (num_processos < 4){  /* Se o numero de threads é menor que 4, realiza a leitura da entrada e cria uma thread */
+    if (num_threads < 4){  /* Se o numero de threads é menor que 4, realiza a leitura da entrada e cria uma thread */
       scanf("%d%c", &numero, &caracter);
 
-      pthread_create(&(threads[num_processos]), NULL, funcao_thread, &numero);
+      pthread_create(&(threads[num_threads]), NULL, funcao_thread, &numero);
 
       for (int p = 0; p<800000; p++); /* Para dar tempo de entrar na função thread antes de ler próximo número. Pode ser trocado pelo sleep, porém aumenta tempo de execução.  */
       /* sleep(1); */
 
-      num_processos++;
+      num_threads++;
 
       if (caracter == '\n'){
         aux = 1;
         break;
       }
     }else { /* Caso o número de threads abertas seja 4, aguarda até uma thread terminar */
-      pthread_join(threads[num_processos-1], NULL);
-      num_processos--;
+      pthread_join(threads[num_threads-1], NULL);
+      num_threads--;
     }
   }
 
